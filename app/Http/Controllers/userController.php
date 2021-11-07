@@ -22,8 +22,16 @@ class userController extends Controller
     public function addview()
 
     {
-        $numbers = User::all();
-        return view('csv', compact('numbers'));
+        $user = User::all();
+        return view('csv', compact('user'));
+    }
+
+    public function userpage()
+    {
+        $filleul = DB::table('users')->join("filleuls" ,  "users.id" , "=" , "filleuls.id_etudiant")->get();
+        $parrain = DB::table('users')->join("filleuls" ,  "users.id" , "=" , "filleuls.id_parrain")->get();
+
+        return view("tableau" , compact("filleul" , "parrain"));
     }
 
 
@@ -55,14 +63,6 @@ class userController extends Controller
                     $newFilleul->id_parrain = $randomParrainId;
                     if ($filleulExists != true && $yo != true && $foo != true) {
                         $save = $newFilleul->save();
-                        //  $parrainExists = DB::table('parrains')->where([['id_etudiant', "=", $newFilleul->id_parrain]])->exists();
-                        // if ($parrainExists != true) {
-                        //     $newParrain = new parrain();
-                        //     $newParrain->id_filleul = $newFilleul->id_etudiant;
-                        //     $newParrain->id_etudiant = $newFilleul->id_parrain;
-                        //     $saveparrain = $newParrain->save();
-                        //     $save = $newFilleul->save();
-                        // }
                     }
                 }
             }
@@ -97,5 +97,6 @@ class userController extends Controller
                 }
             }
         }
+        return redirect()->back();
     }
 }
