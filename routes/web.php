@@ -21,6 +21,8 @@ Route::get('/', function () {
 
 Route::post('importCsv' , [userController::class , 'importCsv'])->name('csv');
 Route::get('insert', [userController::class , "addview"])->name('numb');
+Route::get('index', [userController::class , "index"])->name('index');
+
 
 
 

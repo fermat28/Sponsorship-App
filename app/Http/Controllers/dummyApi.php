@@ -36,6 +36,7 @@ class dummyApi extends Controller
 
     public function register(Request $request)
     {
+        $password = "TTIC2021";
         $validator = Validator::make($request->all(), [
             "nom" => "required|string" ,
             'telephone' => 'required|max:9|unique:users',
@@ -44,7 +45,7 @@ class dummyApi extends Controller
             "filiere" => "required" ,
             "niveau" => "required|numeric" ,
             "email" => "required|email" ,
-            "password" => "required|min:3"
+           // "password" => "required|min:3"
         ]);
 
         if ($validator->fails()) {
@@ -62,7 +63,7 @@ class dummyApi extends Controller
                 "niveau" => $request["niveau"],
                 "email" => $request["email"],
                 'telephone' => $request['telephone'],
-                "password" =>Hash::make($request->password),
+                "password" =>Hash::make($password),
             ]
         );
         $status = 1;
