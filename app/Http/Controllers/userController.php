@@ -30,7 +30,6 @@ class userController extends Controller
     {
         $filleul = DB::table('users')->join("filleuls" ,  "users.id" , "=" , "filleuls.id_etudiant")->get();
         $parrain = DB::table('users')->join("filleuls" ,  "users.id" , "=" , "filleuls.id_parrain")->get();
-
         return view("tableau" , compact("filleul" , "parrain"));
     }
 
@@ -68,7 +67,6 @@ class userController extends Controller
             }
         }
         if ($filleulsize > $parrainsize) {
-            $po = DB::table('users')->where("niveau", 4)->get();
             foreach ($parrains as $p) {
                 while (DB::table('filleuls')->where('id_parrain', $p->id)->exists() == false) {
                     $k = array_rand($tabid);
@@ -85,18 +83,19 @@ class userController extends Controller
                         $save = $newFilleul->save();
                     }
                 }
-                foreach ($filleul as $tb) {
+            }
+
+             foreach ($filleul as $tb) {
                     if (DB::table('filleuls')->where('id_etudiant', $tb->id)->exists() == false) {
                         $kl = array_rand($parrid);
                         $randomParrainId = $parrid[$kl];
                         $newFilleul = new filleul();
                         $newFilleul->id_etudiant = $tb->id;
-                        $newFilleul->id_parrain = $randomParrainId;
+                        $newFilleul->id_parrain = $parrid[array_rand($parrid)];
                         $save = $newFilleul->save();
                     }
                 }
-            }
         }
-        return redirect()->back();
+        return redirect()->route('userpage');
     }
 }

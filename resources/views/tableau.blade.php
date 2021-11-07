@@ -34,23 +34,24 @@
                      <hr>
                <thead>
                  <tr>
+                    <th scope="col">#</th>
                    <th scope="col">Filleul</th>
                    <th scope="col">Parrain</th>
                  </tr>
                </thead>
                <tbody>
                    @foreach ($filleul as $fil)
-                   @foreach ($parrain as $p)
-                   @if ($fil->id_parrain == $p->id_parrain)
+                      @foreach ($parrain as $p)
+                      @if ($fil->id_etudiant == $p->id_etudiant)
 
 
                    <tr>
+                    <th>{{$fil->id}}</th>
                        <th>{{$fil->nom." ".$fil->prenom}}</th>
                        <td>{{$p->nom." ".$p->prenom}}</td>
                      </tr>
                      @endif
-                   @endforeach
-
+                     @endforeach
                    @endforeach
                </tbody>
              </table>

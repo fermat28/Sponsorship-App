@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class parrain extends Model
 {
     use HasFactory;
+    public function filleul()
+    {
+    return $this->hasMany(filleul::class);
+    }
 }

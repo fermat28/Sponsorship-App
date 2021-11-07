@@ -35,6 +35,7 @@
                      <hr>
                <thead>
                  <tr>
+                    <th scope="col">#</th>
                    <th scope="col">Nom</th>
                    <th scope="col">Prenom</th>
                    <th scope="col">Niveau</th>
@@ -44,6 +45,7 @@
                <tbody>
                    @foreach ($user as $users)
                    <tr>
+                    <th>{{$users->id}}</th>
                        <th>{{$users->nom}}</th>
                        <td>{{$users->prenom}}</td>
                        <td>{{$users->niveau}}</td>
