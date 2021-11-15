@@ -17,7 +17,7 @@
                 <div class="flex-1">
                     <h1 class="text-2xl md:text-4xl font-semibold">Bienvenue Aux Parrainages de <span
                             class="text-blue-700">L'Ecole
-                            National Supérieur Polytechnique de Douala 2021/2022</span></h1>
+                            Nationale Supérieure Polytechnique de Douala 2021/2022</span></h1>
                 </div>
                 <div class="flex-1">
                     <div>

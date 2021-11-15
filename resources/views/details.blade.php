@@ -47,7 +47,7 @@
                                 </div>
                                 <div class="w-1/2 dark p-4 flex flex-col justify-center leading-normal">
                                     <div class="flex items-center mt-2">
-                                        <img class="w-40 h-50 rounded-full object-cover mr-4"
+                                        <img class="w-96 h-96  object-cover mr-4"
                                             src="{{asset("assets/img/pp/$fil->profile_photo") }}"
                                             alt="Avatar of Jonathan Reinink" />
                                         <div class="text-xl">

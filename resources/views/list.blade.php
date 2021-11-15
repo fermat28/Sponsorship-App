@@ -8,16 +8,20 @@
     <link rel="stylesheet" href="tailwind.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css" rel="stylesheet">
     <title>Document</title>
+    <style>
+
+    </style>
 </head>
 
 <body>
+<div id='yo'>
     <main class="font-mono">
         <!-- component -->
         <section class="container mx-auto p-6 ">
             <div class="md:flex justify-between">
                 <h1 class="border-l-4 border-blue-500  pl-3 text-3xl font-semibold mb-3">Département {{$filiere}}</h1>
-                <p class="my-5 md:my-0"><a href="{{route('parr')}}" class="p-3 text-white bg-blue-500 hover:bg-blue-700">attribuer les
-                        Parrains</a></p>
+                <p class="my-5 md:my-0"><button id="buttonId" class="p-3 text-white bg-blue-500 hover:bg-blue-700">attribuer les
+                        Parrains</button></p>
             </div>
             <div class="md:grid grid-cols-2 gap-3 w-full mb-8 overflow-hidden rounded-lg shadow-lg">
                 <div class="w-full overflow-x-auto">
@@ -106,6 +110,28 @@
             </div>
         </section>
     </main>
+</div>
+<style>
+    .imoge{
+      z-index: -4;
+      margin-left: 35%;
+      margin-top: 10%;
+
+    }
+</style>
+    <img class="imoge" src={{ asset("assets/bankai.gif") }} id="imgid" style="display:none" class="gif"/>
+    <script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"></script>
+<script>
+    $('#buttonId').click(function(){
+        $("body").css("background-color" , "black");
+        $('#yo').hide();
+        $('#imgid').show(); //this is where you'll show your loading gif
+        setTimeout(function(){window.location= "{{route('parr')}}" ;}, 5000);
+     })
+    </script>
 </body>
 
 </html>
