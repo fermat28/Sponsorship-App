@@ -13,6 +13,7 @@
    </head>
 
    <body>
+   
      <section id="container">
        <!-- **********************************************************************************************************************************************************
            TOP BAR CONTENT & NOTIFICATIONS
@@ -43,12 +44,10 @@
                    @foreach ($filleul as $fil)
                       @foreach ($parrain as $p)
                       @if ($fil->id_etudiant == $p->id_etudiant)
-
-
                    <tr>
                     <th>{{$fil->id}}</th>
-                       <th>{{$fil->nom." ".$fil->prenom}}</th>
-                       <td>{{$p->nom." ".$p->prenom}}</td>
+                       <th><img width="50" height="50" src="{{asset("assets/img/pp/$fil->profile_photo") }}" />  {{$fil->nom." ".$fil->prenom}}</th>
+                       <td><img width="50" height="50" src="{{asset("assets/img/pp/$p->profile_photo") }}"/> {{$p->nom." ".$p->prenom}}</td>
                      </tr>
                      @endif
                      @endforeach
@@ -62,7 +61,6 @@
        </div>
 
        <div class="py-12">
-
    </body>
 
    </html>

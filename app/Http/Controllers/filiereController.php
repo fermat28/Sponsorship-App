@@ -2,39 +2,36 @@
 
 namespace App\Http\Controllers;
 
-use App\Imports\UserImport;
+use App\Models\filiere;
 use App\Models\filleul;
-use App\Models\parrain;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Excel;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
 
-class userController extends Controller
+class filiereController extends Controller
 {
-    //
-    public function importCsv(Request $request)
+    public function Acceuil()
     {
-        Excel::import(new UserImport, public_path($request->fichier));
-        return redirect()->back()->with('status', 'Records  Imported Successfully');
+        $filieres = filiere::all();
+        return view("Acceuil" , compact("filieres"));
     }
 
-    public function addview()
-
+    public function list($filiere = null)
     {
-        $user = User::all();
-        return view('csv', compact('user'));
+        $filleul = DB::table('users')->where([["niveau",3] , ["filiere",$filiere]])->get();
+        $parrain = DB::table('users')->where([["niveau", 4] , ["filiere",$filiere]])->get();
+        return view("list" , compact("filleul" , "parrain" , "filiere"));
     }
-
-    public function userpage()
+    public function details()
     {
+
         $filleul = DB::table('users')->join("filleuls" ,  "users.id" , "=" , "filleuls.id_etudiant")->get();
         $parrain = DB::table('users')->join("filleuls" ,  "users.id" , "=" , "filleuls.id_parrain")->get();
-        return view("tableau" , compact("filleul" , "parrain"));
+
+        return view("details" , compact("filleul" , "parrain"));
     }
 
-
-    public function index()
+    public function parrainer()
     {
         $parrainsize = DB::table('users')->where("niveau", 4)->count();
         $filleulsize =  DB::table('users')->where("niveau", 3)->count();
@@ -96,6 +93,8 @@ class userController extends Controller
                     }
                 }
         }
-        return redirect()->route('userpage');
+        return redirect()->route('details');
     }
+
+
 }

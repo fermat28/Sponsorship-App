@@ -28,6 +28,7 @@ class User extends Authenticatable
         "sexe",
         "filiere",
         "niveau",
+        "profile_photo"
     ];
 
     /**

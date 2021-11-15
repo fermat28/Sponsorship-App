@@ -25,7 +25,8 @@ class UserImport implements ToModel , WithHeadingRow
             "filiere" => $row["filiere"],
             "niveau" => $row["niveau"],
             "telephone" => $row["telephone"],
-            "email" => $row["email"]
+            "email" => $row["email"],
+            "profile_photo" => $row["profile_photo"]
         ]);
     }
 }
