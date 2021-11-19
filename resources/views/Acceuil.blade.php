@@ -41,7 +41,7 @@
                 <div class="grid grid-cols-3">
                     @foreach ($filieres as $filiere)
                     <div class=" flex justify-center items-center px-5 m-2 h-10 text-red-100 transition-colors
-                    duration-150a bg-red-700 rounded-lg focus:shadow-outline hover:bg-red-800">
+                    duration-150a bg-blue-700 rounded-lg focus:shadow-outline hover:bg-red-800">
                         <a class="cursor-pointer w-full text-center" href="{{route('list' , ["filiere" => $filiere->nom])}}">
                             {{$filiere->nom}}
                         </a>

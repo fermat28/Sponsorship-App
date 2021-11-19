@@ -36,7 +36,7 @@
                                     class="w-1/2 h-full dark overflow-hidden flex flex-col justify-center items-center">
                                     <div>
                                         <img class="object-center object-cover h-96 w-96"
-                                            src="{{asset("assets/img/pp/$p->profile_photo") }}"
+                                            src="{{asset("assets/img/pp/$filiere/parrains/$p->profile_photo") }}"
                                             alt="photo" />
                                     </div>
                                     <div class="">
@@ -48,7 +48,7 @@
                                 <div class="w-1/2 dark p-4 flex flex-col justify-center leading-normal">
                                     <div class="flex items-center mt-2">
                                         <img class="w-96 h-96  object-cover mr-4"
-                                            src="{{asset("assets/img/pp/$fil->profile_photo") }}"
+                                            src="{{asset("assets/img/pp/$filiere/filleuls/$fil->profile_photo") }}"
                                             alt="Avatar of Jonathan Reinink" />
                                         <div class="text-xl">
                                             <p class=" leading-none">{{$fil->nom." ".$fil->prenom}}</p>

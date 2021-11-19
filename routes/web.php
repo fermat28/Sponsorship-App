@@ -26,8 +26,8 @@ Route::get('index', [userController::class , "index"])->name('index');
 Route::get('userpage', [userController::class , "userpage"])->name('userpage');
 Route::get('/', [filiereController::class , "Acceuil"])->name('Acceuil');
 Route::get('/list/{filiere}', [filiereController::class , "list"])->name('list');
-Route::get('parr', [filiereController::class , "parrainer"])->name('parr');
-Route::get('details', [filiereController::class , "details"])->name('details');
+Route::get('parr/{filiere}', [filiereController::class , "parrainer"])->name('parr');
+Route::get('details/{filiere}', [filiereController::class , "details"])->name('details');
 
 
 

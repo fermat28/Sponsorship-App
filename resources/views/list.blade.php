@@ -44,7 +44,7 @@
                                     <div class="flex items-center text-sm">
                                         <div class="relative w-8 h-8 mr-3 rounded-full md:block">
                                             <img class="object-cover w-full h-full rounded-full"
-                                                src="{{asset("assets/img/pp/$p->profile_photo") }}"
+                                                src="{{asset("assets/img/pp/$filiere/parrains/$p->profile_photo") }}"
                                                 alt="" loading="lazy" />
                                             <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true">
                                             </div>
@@ -61,13 +61,11 @@
                                 </td>
                             </tr>
                           @endforeach
-
-
                         </tbody>
                     </table>
                 </div>
                 <div class="w-full overflow-x-auto">
-                    <h3 class="text-2xl mb-3">Les Fieuls</h3>
+                    <h3 class="text-2xl mb-3">Les Filleuls</h3>
                     <table class="w-full">
                         <thead>
                             <tr
@@ -86,7 +84,7 @@
                                     <div class="flex items-center text-sm">
                                         <div class="relative w-8 h-8 mr-3 rounded-full md:block">
                                             <img class="object-cover w-full h-full rounded-full"
-                                                src="{{asset("assets/img/pp/$fil->profile_photo") }}"
+                                                src="{{asset("assets/img/pp/$filiere/filleuls/$fil->profile_photo") }}"
                                                 alt="" loading="lazy" />
                                             <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true">
                                             </div>
@@ -114,22 +112,35 @@
 <style>
     .imoge{
       z-index: -4;
-      margin-left: 35%;
+      margin-left: 15%;
       margin-top: 10%;
 
     }
 </style>
-    <img class="imoge" src={{ asset("assets/bankai.gif") }} id="imgid" style="display:none" class="gif"/>
+
+<style>
+    .imge{
+      z-index: -4;
+      margin-left: 65%;
+      margin-top: -30%;
+
+    }
+</style>
+
+    <img class="imoge" src={{ asset("assets/img/pp/$filiere/parrains/$filiere._parrains.gif") }} id="imgid" style="display:none" class="gif" width="300" , height="300"/>
+    <img class="imge" src={{ asset("assets/img/pp/$filiere/filleuls/$filiere._filleuls.gif") }} id="imgad" style="display:none" class="gif" width="300" , height="300"/>
     <script
   src="https://code.jquery.com/jquery-3.6.0.js"
   integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
   crossorigin="anonymous"></script>
 <script>
     $('#buttonId').click(function(){
+        var filiere = {!! json_encode($filiere) !!};
         $("body").css("background-color" , "black");
         $('#yo').hide();
         $('#imgid').show(); //this is where you'll show your loading gif
-        setTimeout(function(){window.location= "{{route('parr')}}" ;}, 5000);
+        $('#imgad').show();
+        setTimeout(function(){window.location= "{{route('parr', ['filiere' => $filiere])}}" ;}, 3000);
      })
     </script>
 </body>
