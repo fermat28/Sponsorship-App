@@ -22,60 +22,68 @@ class filiereController extends Controller
         $filleul = DB::table('users')->where([["niveau", "=", 3], ["filiere", "=", $filiere]])->get();
         $parrain = DB::table('users')->where([["niveau", "=", 4], ["filiere", "=", $filiere]])->get();
 
-        if(is_file(public_path("assets/img/pp/$filiere/parrains/$filiere._parrains.gif")) == false)
-       {
+        if (is_file(public_path("assets/img/pp/$filiere/parrains/$filiere._parrains.gif")) == false) {
 
-        if ($handle = opendir(public_path("assets/img/pp/$filiere/parrains"))) {
+            if ($handle = opendir(public_path("assets/img/pp/$filiere/parrains"))) {
 
-            while (false !== ($entry = readdir($handle))) {
+                while (false !== ($entry = readdir($handle))) {
 
-                if ($entry != "." && $entry != "..") {
-                    $frames_parrains[]  = public_path("assets/img/pp/$filiere/parrains/$entry");
+                    if ($entry != "." && $entry != "..") {
+                        $imgFile = \Image::make(public_path("assets/img/pp/$filiere/parrains/$entry"));
+                        $imgFile->resize(500, 500, function ($constraint) {
+                            $constraint->aspectRatio();
+                        })->save(public_path("assets/img/pp/$filiere/parrains/$entry"));
+                        $frames_parrains[]  = public_path("assets/img/pp/$filiere/parrains/$entry");
+                    }
                 }
+                foreach ($frames_parrains as $fr) {
+                    $i = 0;
+                    $durations[] = 10;
+                    $i++;
+                }
+                $gc = new GifCreator();
+                $gc->create($frames_parrains, $durations, 4);
+                $gifBinary = $gc->getGif();
+                file_put_contents(public_path("assets/img/pp/$filiere/parrains/$filiere._parrains.gif"), $gifBinary);
+                closedir($handle);
             }
-            foreach ($frames_parrains as $fr) {
-                $i = 0;
-                $durations[] = 10;
-                $i++;
-            }
-            $gc = new GifCreator();
-            $gc->create($frames_parrains, $durations, 4);
-            $gifBinary = $gc->getGif();
-            file_put_contents(public_path("assets/img/pp/$filiere/parrains/$filiere._parrains.gif"), $gifBinary);
-            closedir($handle);
         }
-    }
 
-    if(is_file(public_path("assets/img/pp/$filiere/filleuls/$filiere._filleuls.gif")) == false)
-    {
+        if (is_file(public_path("assets/img/pp/$filiere/filleuls/$filiere._filleuls.gif")) == false) {
 
-     if ($handle = opendir(public_path("assets/img/pp/$filiere/filleuls"))) {
+            if ($handle = opendir(public_path("assets/img/pp/$filiere/filleuls"))) {
 
-         while (false !== ($entry = readdir($handle))) {
+                while (false !== ($entry = readdir($handle))) {
 
-             if ($entry != "." && $entry != "..") {
-                 $frames_filleuls[]  = public_path("assets/img/pp/$filiere/filleuls/$entry");
-             }
-         }
-         foreach ($frames_filleuls as $fro) {
-             $i = 0;
-             $durations[] = 10;
-             $i++;
-         }
-         $gc = new GifCreator();
-         $gc->create($frames_filleuls, $durations, 4);
-         $gifBinary = $gc->getGif();
-         file_put_contents(public_path("assets/img/pp/$filiere/filleuls/$filiere._filleuls.gif"), $gifBinary);
-         closedir($handle);
-     }
- }
+                    if ($entry != "." && $entry != "..") {
+                        $imgFile = \Image::make( public_path("assets/img/pp/$filiere/filleuls/$entry"));
+                        $imgFile->resize(500, 500, function ($constraint) {
+                            $constraint->aspectRatio();
+                        })->save( public_path("assets/img/pp/$filiere/filleuls/$entry"));
+                        $frames_filleuls[]  = public_path("assets/img/pp/$filiere/filleuls/$entry");
+                    }
+                }
+                foreach ($frames_filleuls as $fro) {
+                    // $i = 0;
+                    $durations[] = 10;
+                    // $i++;
+                }
+                $gc = new GifCreator();
+                $gc->create($frames_filleuls, $durations, 4);
+                $gifBinary = $gc->getGif();
+                file_put_contents(public_path("assets/img/pp/$filiere/filleuls/$filiere._filleuls.gif"), $gifBinary);
+                closedir($handle);
+            }
+        }
         return view("list", compact("filleul", "parrain", "filiere"));
     }
     public function details($filiere)
     {
 
-        $filleul = DB::table('users')->join("filleuls",  "users.id", "=", "filleuls.id_etudiant")->where("filiere", $filiere)->get();
-        $parrain = DB::table('users')->join("filleuls",  "users.id", "=", "filleuls.id_parrain")->where("filiere", $filiere)->get();
+        $filleul = DB::table('users')->join("filleuls",  "users.id", "=", "filleuls.id_etudiant")
+            ->where("filiere", $filiere)->get();
+        $parrain = DB::table('users')->join("filleuls",  "users.id", "=", "filleuls.id_parrain")
+            ->where("filiere", $filiere)->get();
         return view("details", compact("filleul", "parrain", "filiere"));
     }
 
@@ -87,7 +95,7 @@ class filiereController extends Controller
         foreach ($filleul as $f) {
             $tabid[] = $f->id;
         }
-        $parrains = DB::table('users')->where([["niveau", 4]])->get();
+        $parrains = DB::table('users')->where([["niveau", 4], ["filiere", "=", $filiere]])->get();
         foreach ($parrains as $p) {
             $parrid[] = $p->id;
         }
@@ -98,7 +106,9 @@ class filiereController extends Controller
                     $randomFilleulsId = $tabid[$k];
                     $kl = array_rand($parrid);
                     $randomParrainId = $parrid[$kl];
-                    $filleulExists = DB::table('filleuls')->where([['id_etudiant', "=", $randomFilleulsId], ['id_parrain', "=", $randomParrainId]])->exists();
+                    $filleulExists = DB::table('filleuls')
+                        ->where([['id_etudiant', "=", $randomFilleulsId], ['id_parrain', "=", $randomParrainId]])
+                        ->exists();
                     $yo = DB::table('filleuls')->where([['id_etudiant', "=", $randomFilleulsId]])->exists();
                     $foo = DB::table('filleuls')->where([['id_parrain', "=", $randomParrainId]])->exists();
 
@@ -118,7 +128,9 @@ class filiereController extends Controller
                     $randomFilleulsId = $tabid[$k];
                     $kl = array_rand($parrid);
                     $randomParrainId = $parrid[$kl];
-                    $filleulExists = DB::table('filleuls')->where([['id_etudiant', "=", $randomFilleulsId], ['id_parrain', "=", $randomParrainId]])->exists();
+                    $filleulExists = DB::table('filleuls')
+                        ->where([['id_etudiant', "=", $randomFilleulsId], ['id_parrain', "=", $randomParrainId]])
+                        ->exists();
                     $yo = DB::table('filleuls')->where([['id_etudiant', "=", $randomFilleulsId]])->exists();
                     $foo = DB::table('filleuls')->where([['id_parrain', "=", $randomParrainId]])->exists();
                     if ($filleulExists != true && $yo != true && $foo != true) {

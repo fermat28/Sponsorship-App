@@ -127,8 +127,8 @@
     }
 </style>
 
-    <img class="imoge" src={{ asset("assets/img/pp/$filiere/parrains/$filiere._parrains.gif") }} id="imgid" style="display:none" class="gif" width="300" , height="300"/>
-    <img class="imge" src={{ asset("assets/img/pp/$filiere/filleuls/$filiere._filleuls.gif") }} id="imgad" style="display:none" class="gif" width="300" , height="300"/>
+    <img class="imoge" src={{ asset("assets/img/pp/$filiere/parrains/$filiere._parrains.gif") }} id="imgid" style="display:none" class="gif" />
+    <img class="imge" src={{ asset("assets/img/pp/$filiere/filleuls/$filiere._filleuls.gif") }} id="imgad" style="display:none" class="gif"/>
     <script
   src="https://code.jquery.com/jquery-3.6.0.js"
   integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
