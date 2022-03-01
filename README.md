@@ -31,12 +31,14 @@ List the ready features here:
 
 
 ## Screenshots
-![Example screenshot](./Capture d’écran de 2021-11-15 23-16-04.png)
-<!-- If you have screenshots you'd like to share, include them here. -->
+![Example screenshot](./storage/spon1.png)
+![Example screenshot](./storage/spon2.png)
+![Example screenshot](./storage/spon3.png)
+
 
 
 ## Setup
-PHP 8 or higher
+PHP >= 8
 
 ## Usage
 
