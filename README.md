@@ -40,12 +40,6 @@ List the ready features here:
 ## Setup
 PHP >= 8
 
-## Usage
-
-`composer install
- php artisan serve
-
-
 ## Project Status
 Project is: _complete_ /
 
