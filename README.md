@@ -31,7 +31,7 @@ List the ready features here:
 
 
 ## Screenshots
-![Example screenshot](/Capture d’écran de 2021-11-15 23-16-04.png)
+![Example screenshot](./Capture d’écran de 2021-11-15 23-16-04.png)
 <!-- If you have screenshots you'd like to share, include them here. -->
 
 
